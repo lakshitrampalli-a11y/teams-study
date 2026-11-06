@@ -1,13 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App</title>
-</head>
-<body>
-    <h1>Welcome to My App</h1>
-    <p>This is my website running on GitHub Pages!</p>
-</body>
-</html>
+ <head>
+  <meta charset="utf-8"/>
+  <link href="https://media.base44.com/images/public/6a2f88066be0c4b53644e370/9a9893b3e_logo.jpg/v1/fit/w_180,h_180/9a9893b3e_logo.jpg" rel="icon" type="image/svg+xml"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="/manifest.json" rel="manifest"/>
+  <title>Teams</title>
+  <meta content="Teams brings messages, call signals, direct messages, attendances, and timetables together across 38 pages for meetings, tasks, analytics, study, and server." name="description"/>
+  <meta content="study, education, students, tasks, learning, collaboration" name="keywords"/>
+  <meta content="Teams" property="og:title"/>
+  <meta content="Teams brings messages, call signals, direct messages, attendances, and timetables together across 38 pages for meetings, tasks, analytics, study, and server." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Teams" name="twitter:title"/>
+  <meta content="Teams brings messages, call signals, direct messages, attendances, and timetables together across 38 pages for meetings, tasks, analytics, study, and server." name="twitter:description"/>
+  <meta content="-aPdAPoDkXiYROtDYa7RnqLgltoyznx43YM67tVY_Bg" name="google-site-verification"/>
+  <script crossorigin="" src="/assets/index-CpPAI1u1.js" type="module"></script>
+  <link crossorigin="" href="/assets/index-Dj9ae0ka.css" rel="stylesheet"/>
+  <script type="module">
+   if (window.self === window.top) {
+      let lastPath = "";
+      let consentGranted = null;
+      function getPageNameFromPath(path) {
+        const segments = path.split("/").filter(Boolean);
+        return segments[0] || null;
+      }
+      function analyticsMode() {
+        const meta = document.querySelector('meta[name="base44-analytics"]');
+        return meta ? meta.getAttribute("content") : null;
+      }
+      function deniedBefore() {
+        try { return window.localStorage.getItem("base44_analytics_denied") === "1"; } catch (e) { return false; }
+      }
+      function mayTrack() {
+        const mode = analyticsMode();
+        if (mode === "off") return false;
+        if (mode === "consent") return consentGranted === true;
+        if (mode === "on") return consentGranted === null ? !deniedBefore() : consentGranted;
+        return true;
+      }
+      function trackPageView() {
+        if (!mayTrack()) return;
+        const path = window.location.pathname;
+        if (path === lastPath) return;
+        lastPath = path;
+        const pageName = getPageNameFromPath(path) || "home";
+        const appId = "6a2f88066be0c4b53644e370";
+        if (!appId) return;
+        fetch(`/api/app-logs/${appId}/log-user-in-app/${pageName}`, { method: "POST" }).catch(() => {});
+      }
+      const originalPushState = history.pushState.bind(history);
+      history.pushState = function (...args) { originalPushState(...args); trackPageView(); };
+      const originalReplaceState = history.replaceState.bind(history);
+      history.replaceState = function (...args) { originalReplaceState(...args); trackPageView(); };
+      window.addEventListener("popstate", trackPageView);
+      try {
+        if (window.__b44Consent) {
+          window.__b44Consent.on("analytics_storage", function () { consentGranted = true; trackPageView(); }, function () { consentGranted = false; lastPath = ""; });
+        }
+      } catch (e) {}
+      trackPageView();
+    }
+  </script>
+  <meta content="on" name="base44-analytics"/>
+  <script id="b44-consent-listener">
+   (function () {
+      if (window.__b44Consent) return;
+      var state = {};
+      var listeners = [];
+      function notify(listener) {
+        try { (state[listener.category] === "granted" ? listener.grant : listener.revoke)(); } catch (e) {}
+      }
+      function read(entry) {
+        if (!entry || entry[0] !== "consent" || entry[1] !== "update" || !entry[2]) return;
+        for (var category in entry[2]) {
+          state[category] = entry[2][category];
+          for (var i = 0; i < listeners.length; i++) {
+            if (listeners[i].category === category) notify(listeners[i]);
+          }
+        }
+      }
+      var dataLayer = (window.dataLayer = window.dataLayer || []);
+      for (var i = 0; i < dataLayer.length; i++) read(dataLayer[i]);
+      var push = dataLayer.push;
+      dataLayer.push = function () {
+        var result = push.apply(dataLayer, arguments);
+        for (var j = 0; j < arguments.length; j++) read(arguments[j]);
+        return result;
+      };
+      window.__b44Consent = {
+        on: function (category, grant, revoke) {
+          var listener = { category: category, grant: grant, revoke: revoke };
+          listeners.push(listener);
+          if (category in state) notify(listener);
+        },
+      };
+    })();
+  </script>
+  <meta content="on" data-source="default" name="base44-visitor-tracking"/>
+  <script id="b44-visitor-tracking">
+   (function () {
+      try {
+        if (window.top !== window) return;
+        var CONSENT_CATEGORY = "analytics_storage";
+        var attributes = "; Path=/; Secure; SameSite=Lax";
+        var keep = "; Max-Age=2592000" + attributes;
+        var referrerId = new URLSearchParams(window.location.search).get("ref");
+        var referrerOrigin = document.referrer && new URL(document.referrer).origin;
+        function write() {
+          if (referrerId && /^[0-9a-f]{24}$/i.test(referrerId)) {
+            document.cookie = "base44_referrer_id=" + referrerId + keep;
+          }
+          var hasOrigin = /(?:^|;\s*)base44_referrer_origin=/.test(document.cookie);
+          if (!hasOrigin && /^https?:\/\//.test(referrerOrigin) && referrerOrigin !== window.location.origin) {
+            document.cookie = "base44_referrer_origin=" + referrerOrigin + keep;
+          }
+        }
+        function clear() {
+          document.cookie = "base44_referrer_id=; Max-Age=0" + attributes;
+          document.cookie = "base44_referrer_origin=; Max-Age=0" + attributes;
+        }
+        var meta = document.querySelector('meta[name="base44-visitor-tracking"]');
+        if (meta && meta.getAttribute("data-source") === "default" && navigator.globalPrivacyControl) {
+          clear();
+        } else if (meta && meta.content === "consent") {
+          window.__b44Consent.on(CONSENT_CATEGORY, write, clear);
+        } else {
+          write();
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <meta content="https://media.base44.com/images/public/6a2f88066be0c4b53644e370/8585a2483_images.jpeg/v1/fill/w_1200,h_630/8585a2483_images.jpeg" property="og:image"/>
+  <meta content="https://teams-study.base44.app" property="og:url"/>
+  <meta content="Teams" property="og:site_name"/>
+  <meta content="https://media.base44.com/images/public/6a2f88066be0c4b53644e370/8585a2483_images.jpeg/v1/fill/w_1200,h_630/8585a2483_images.jpeg" name="twitter:image"/>
+  <meta content="https://teams-study.base44.app" name="twitter:url"/>
+  <script>
+   (function () {
+      var titles = {"/oauth/consent": "O Auth Consent | Teams", "/": "Teams", "/groups": "Groups | Teams", "/copilot": "Copilot | Teams", "/files": "Files Hub | Teams", "/activity": "Activity | Teams", "/settings": "Settings | Teams", "/admin": "Admin Panel | Teams", "/pomodoro": "Pomodoro | Teams", "/notes": "Notes | Teams", "/dm": "Direct Messages | Teams", "/server": "Server Management | Teams", "/advanced-settings": "Advanced Settings | Teams", "/meeting": "Meeting | Teams", "/books": "Books | Teams", "/class-timetable-admin": "Class Timetable Admin | Teams", "/my-timetable": "Student Timetable | Teams", "/my-dashboard": "Student Dashboard | Teams", "/attendance-summary": "Attendance Summary | Teams", "/analytics": "Analytics | Teams", "/moderation": "Moderation | Teams", "/assignments": "Assignments | Teams", "/server-dashboard": "Server Dashboard | Teams", "/exam-syllabus": "Exam Syllabus | Teams", "/assignment-tracker": "Assignment Tracker | Teams", "/office": "Office | Teams", "/calendar": "Calendar Page | Teams", "/saved": "Saved Messages | Teams", "/reminders": "Reminders | Teams", "/calls": "Calls | Teams", "/export": "Export | Teams", "/home": "Teams"};
+      var dashed = function (s) {
+        return s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/([A-Z])([A-Z][a-z])/g, "$1-$2");
+      };
+      var decode = function (s) {
+        try { var d = decodeURIComponent(s); return d.indexOf("/") < 0 ? d : s; } catch (e) { return s; }
+      };
+      var segments = function (path) { return path.split("/").
+
 
