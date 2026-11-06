@@ -145,6 +145,92 @@
       var decode = function (s) {
         try { var d = decodeURIComponent(s); return d.indexOf("/") < 0 ? d : s; } catch (e) { return s; }
       };
-      var segments = function (path) { return path.split("/").
+      var segments = function (path) { return path.split("/").filter(Boolean).map(decode); };
+      var norm = function (path) {
+        var parts = segments(path).map(function (s) { return dashed(s).toLowerCase(); });
+        return parts.length ? "/" + parts.join("/") : "/";
+      };
+      var lastPath = location.pathname, written = document.title, on = true;
+      var sync = function () {
+        if (!on || location.pathname === lastPath) return;
+        lastPath = location.pathname;
+        if (document.title !== written) { on = false; return; }
+        var title = titles[norm(location.pathname)];
+        if (title === undefined) return;
+        document.title = title;
+        written = document.title;
+      };
+      var wrap = function (fn) {
+        return function () {
+          var r = fn.apply(this, arguments);
+          try { sync(); } catch (e) {}
+          return r;
+        };
+      };
+      history.pushState = wrap(history.pushState);
+      history.replaceState = wrap(history.replaceState);
+      window.addEventListener("popstate", sync);
+    })();
+  </script>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="Teams" name="apple-mobile-web-app-title"/>
+  <link href="https://teams-study.base44.app" rel="canonical"/>
+  <script data-seo-source="builder" type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "WebSite", "name": "Teams", "url": "https://teams-study.base44.app"}
+  </script>
+  <script data-seo-source="builder" type="application/ld+json">
+   {"@context": "https://schema.org", "@type": "Organization", "name": "Teams", "url": "https://teams-study.base44.app", "logo": "https://media.base44.com/images/public/6a2f88066be0c4b53644e370/9a9893b3e_logo.jpg"}
+  </script>
+ </head>
+ <body>
+  <div id="root">
+   <div data-seo-source="builder" id="seo-snapshot" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    <main>
+     <header>
+      <h1>Teams</h1>
+      <p>Teams brings messages, call signals, direct messages, attendances, and timetables together across 38 pages for meetings, tasks, analytics, study, and server.</p>
+     </header>
+     <nav aria-label="Pages">
+      <h2>Pages</h2>
+      <ul>
+       <li><a href="/oauth/consent">O Auth Consent</a></li>
+       <li><a href="/groups">Groups</a></li>
+       <li><a href="/copilot">Copilot</a></li>
+       <li><a href="/files">Files Hub</a></li>
+       <li><a href="/activity">Activity</a></li>
+       <li><a href="/settings">Settings</a></li>
+       <li><a href="/admin">Admin Panel</a></li>
+       <li><a href="/pomodoro">Pomodoro</a></li>
+       <li><a href="/notes">Notes</a></li>
+       <li><a href="/dm">Direct Messages</a></li>
+       <li><a href="/server">Server Management</a></li>
+       <li><a href="/advanced-settings">Advanced Settings</a></li>
+       <li><a href="/meeting">Meeting</a></li>
+       <li><a href="/books">Books</a></li>
+       <li><a href="/class-timetable-admin">Class Timetable Admin</a></li>
+       <li><a href="/my-timetable">Student Timetable</a></li>
+       <li><a href="/my-dashboard">Student Dashboard</a></li>
+       <li><a href="/attendance-summary">Attendance Summary</a></li>
+       <li><a href="/analytics">Analytics</a></li>
+       <li><a href="/moderation">Moderation</a></li>
+       <li><a href="/assignments">Assignments</a></li>
+       <li><a href="/server-dashboard">Server Dashboard</a></li>
+       <li><a href="/exam-syllabus">Exam Syllabus</a></li>
+       <li><a href="/assignment-tracker">Assignment Tracker</a></li>
+       <li><a href="/office">Office</a></li>
+       <li><a href="/calendar">Calendar Page</a></li>
+       <li><a href="/saved">Saved Messages</a></li>
+       <li><a href="/reminders">Reminders</a></li>
+       <li><a href="/calls">Calls</a></li>
+       <li><a href="/export">Export</a></li>
+      </ul>
+     </nav>
+    </main>
+   </div>
+  </div>
+ </body>
+</html>
+
 
 
